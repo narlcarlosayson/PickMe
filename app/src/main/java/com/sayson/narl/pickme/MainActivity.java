@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         backMain = (RelativeLayout) findViewById(R.id.backM);
 
 
-
-
         buttonImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, selectImage);
                 shareIntent.setType("image/jpeg");
-                startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.sendfor)));
+                startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
             }
         });
 
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int resultCode, int requestCode, Intent imageBackIntent) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageBackIntent) {
         super.onActivityResult(requestCode, resultCode, imageBackIntent);
         switch (requestCode) {
             case 0:
@@ -74,16 +72,36 @@ public class MainActivity extends AppCompatActivity {
                         backMain.setBackground(mDrawable);
                     } catch (FileNotFoundException e) {
 
-                        Drawable mDrawable = getResources().getDrawable(R.drawable.green);
+                        Drawable mDrawable = getResources().getDrawable(R.drawable.pickcam);
                     }
                 }
                 break;
 
+
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    Uri selectImage = imageBackIntent.getData();
+                    buttonImage.setVisibility(View.GONE);
+                    shareButton.setVisibility(View.VISIBLE);
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(selectImage);
+                        Drawable yourDrawable = Drawable.createFromStream(inputStream, selectImage.toString());
+                        backMain.setBackground(yourDrawable);
+                    } catch (FileNotFoundException e) {
+                        Drawable yourDrawable = getResources().getDrawable(R.drawable.pickcam);
+
+                    }
+
+
+                }
+break;
+
         }
 
     }
-
 }
+
+
 
 
 

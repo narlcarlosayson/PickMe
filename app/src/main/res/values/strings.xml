@@ -2,4 +2,6 @@
     <string name="app_name">PickMe</string>
     <string name="sharePick">String</string>
     <string name="sendfor">Lran</string>
+    <string name="send_to">send</string>
+    <string name="Share">Share</string>
 </resources>

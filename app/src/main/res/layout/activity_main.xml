@@ -27,11 +27,8 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/green"
         android:textColor="#FFFFFF"
-        android:text="@string/sharePick"
+        android:text="@string/Share"
         />
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/immg"/>
+
 
 </RelativeLayout>
